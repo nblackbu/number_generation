@@ -23,8 +23,7 @@ public class NumberService {
             return listRandom.get(countRandom++);
         }
         else {
-            return "Random numbers are over";
-        }
+            return "Random numbers are over"; }
     }
 
     public String getNextCarNumberInOrder(){
