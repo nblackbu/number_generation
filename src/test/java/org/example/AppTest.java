@@ -21,5 +21,9 @@ public class AppTest {
         for (int i = 0; i < size; i++) {
             System.out.println(numberService.getNextCarNumberRandom());
         }
+
+        for (int i = 0; i < size; i++) {
+            System.out.println(numberService.getNextCarNumberInOrder());
+        }
     }
 }
