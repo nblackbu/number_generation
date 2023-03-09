@@ -18,15 +18,22 @@ public class AppTest {
 
     NumberService numberService = new NumberService(carNumberListGeneratorService.returnAutoMobileNumberRandom(),carNumberListGeneratorService.returnAutoMobileNumberInOrder());
 
+
     @Test
     public void orderCheck () {
 
-        Assert.assertTrue(ordinalList.get(0).equals("A000AA 116 RUS"));
-        Assert.assertTrue(ordinalList.get(1).equals("A001AA 116 RUS"));
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AA 116 RUS"));
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A001AA 116 RUS"));
     }
     @Test
     public void sizeCheck () {
         Assert.assertThat(ordinalList, hasSize(1728000));
         Assert.assertThat(randomList, hasSize(1728000));
+    }
+
+    @Test
+    public void boundaryTest () {
+        numberService.setCountInOrder(1727999);
+        System.out.println(numberService.getNextCarNumberInOrder());
     }
 }
