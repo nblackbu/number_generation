@@ -12,7 +12,7 @@ public class NumberConfiguration {
     private GeneratorNumberService carNumberListGeneratorService;
 
     @Bean
-    public NumberService random() {
+    public NumberService generationService() {
         return new NumberService(carNumberListGeneratorService.returnAutoMobileNumberRandom(), carNumberListGeneratorService.returnAutoMobileNumberInOrder());
     }
 }
