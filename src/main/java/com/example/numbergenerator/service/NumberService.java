@@ -1,6 +1,5 @@
 package com.example.numbergenerator.service;
 
-import java.util.Collections;
 import java.util.List;
 
 public class NumberService {
@@ -10,7 +9,7 @@ public class NumberService {
     private volatile int countRandom = 0;
     private volatile int countInOrder = 0;
 
-    // сеттеры сделаны для тестирования пограничнях значений
+    // сеттеры сделаны для тестирования пограничных значений
     public void setCountRandom(int countRandom) {
         this.countRandom = countRandom;
     }
@@ -26,18 +25,15 @@ public class NumberService {
 
     public String getNextCarNumberRandom() {
         if (countRandom < randomList.size()) {
-            return randomList.get(countRandom++);
-        }
+            return randomList.get(countRandom++); }
         else {
             countRandom = 0;
-            return randomList.get(countRandom++);
-        }
+            return randomList.get(countRandom++); }
     }
 
     public String getNextCarNumberInOrder(){
         if (countInOrder < ordinalList.size()) {
-            return ordinalList.get(countInOrder++);
-        }
+            return ordinalList.get(countInOrder++); }
         else {
             countInOrder = 0;
             return ordinalList.get(countInOrder++); }

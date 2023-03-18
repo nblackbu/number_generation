@@ -10,13 +10,13 @@ import java.util.List;
 public class GeneratorNumberService {
 
     private final String[] letters = {"A", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
+    private final String rus = "116 RUS";
 
     public List<String> listGeneration() {
 
         String str1 = null;
         List<String> list1 = new ArrayList<>();
 
-        synchronized (this) {
             for (int y = 0; y < letters.length; y++) {
                 for (int z = 0; z < letters.length; z++) {
                     for (int x = 0; x < letters.length; x++) {
@@ -24,13 +24,12 @@ public class GeneratorNumberService {
                             if (i >= 0 && i <= 9) str1 = "00" + i;
                             if (i >= 10 && i <= 99) str1 = "0" + i;
                             if (i >= 100 && i <= 999) str1 = "" + i;
-                            String rez = letters[x] + str1 + letters[z] + letters[y] + " 116 RUS";
+                            String rez = letters[x] + str1 + letters[z] + letters[y] + " " + rus;
                             list1.add(rez);
                         }
                     }
                 }
             }
-        }
         return list1;
     }
 
