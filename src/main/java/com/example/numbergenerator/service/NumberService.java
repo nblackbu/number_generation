@@ -1,5 +1,6 @@
 package com.example.numbergenerator.service;
 
+import java.util.Collections;
 import java.util.List;
 
 public class NumberService {
@@ -24,11 +25,13 @@ public class NumberService {
     }
 
     public String getNextCarNumberRandom() {
-        if (countRandom <= randomList.size()) {
+        if (countRandom < randomList.size()) {
             return randomList.get(countRandom++);
         }
         else {
-            return "Random numbers are over"; }
+            countRandom = 0;
+            return randomList.get(countRandom++);
+        }
     }
 
     public String getNextCarNumberInOrder(){
@@ -36,6 +39,7 @@ public class NumberService {
             return ordinalList.get(countInOrder++);
         }
         else {
-           return "Order numbers are over"; }
+            countInOrder = 0;
+            return ordinalList.get(countInOrder++); }
     }
 }

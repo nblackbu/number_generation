@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public class GeneratorNumberService {
 
-    private final String[] letters = {"A", "Е", "Т", "О", "Р", "Н", "У", "К", "Х", "С", "В", "М"};
+    private final String[] letters = {"A", "В", "Е", "К", "М", "Н", "О", "Р", "С", "Т", "У", "Х"};
 
     public List<String> listGeneration() {
 
