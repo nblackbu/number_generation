@@ -6,8 +6,8 @@ public class NumberService {
     private final List<String> randomList;
     private final List<String> ordinalList;
 
-    private volatile int countRandom = 0;
-    private volatile int countInOrder = 0;
+    private int countRandom = 0;
+    private int countInOrder = 0;
 
     // сеттеры сделаны для тестирования пограничных значений
     public void setCountRandom(int countRandom) {
@@ -23,7 +23,7 @@ public class NumberService {
         this.ordinalList = listInOrder;
     }
 
-    public String getNextCarNumberRandom() {
+    public synchronized String getNextCarNumberRandom() {
         if (countRandom < randomList.size()) {
             return randomList.get(countRandom++); }
         else {
@@ -31,7 +31,7 @@ public class NumberService {
             return randomList.get(countRandom++); }
     }
 
-    public String getNextCarNumberInOrder(){
+    public synchronized String getNextCarNumberInOrder(){
         if (countInOrder < ordinalList.size()) {
             return ordinalList.get(countInOrder++); }
         else {

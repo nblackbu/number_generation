@@ -24,7 +24,7 @@ public class GeneratorNumberService {
                             if (i >= 0 && i <= 9) str1 = "00" + i;
                             if (i >= 10 && i <= 99) str1 = "0" + i;
                             if (i >= 100 && i <= 999) str1 = "" + i;
-                            String rez = letters[x] + str1 + letters[z] + letters[y] + " " + rus;
+                            String rez = letters[y] + str1 + letters[z] + letters[x] + " " + rus;
                             list1.add(rez);
                         }
                     }

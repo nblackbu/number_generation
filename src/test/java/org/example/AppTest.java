@@ -23,12 +23,7 @@ public class AppTest {
     Set<String> setRandom = new HashSet(randomList);
     NumberService numberService = new NumberService(carNumberListGeneratorService.returnAutoMobileNumberRandom(),carNumberListGeneratorService.returnAutoMobileNumberInOrder());
 
-    @Test
-    public void orderCheck () {
-        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AA 116 RUS"));
-        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A001AA 116 RUS"));
-    }
-
+    // Проверка на повторы и размер списка
     @Test
     public void sizeAndRepeatCheck () {
         Assert.assertThat(ordinalList, hasSize(1728000));
@@ -39,16 +34,115 @@ public class AppTest {
         Assert.assertThat(setRandom, hasSize(1728000));
     }
 
+    // Проверка исчерпания списка: после исчерпания, счетчик обнуляется и значения выдаются начинаются с начала списка
     @Test
     public void boundaryTest () {
         numberService.setCountInOrder(1727999);
         System.out.println(numberService.getNextCarNumberInOrder());
 
-        //проверка на исчерпание списка.
-        //После исчерпания, счетчик обнуляется и значения выдаются начинаются с начала списка
         numberService.setCountInOrder(1728000);
         System.out.println(numberService.getNextCarNumberInOrder());
         System.out.println(numberService.getNextCarNumberInOrder());
         System.out.println(numberService.getNextCarNumberInOrder());
+    }
+
+    // Проверка перехода между 99 и 100 в первом регистре
+    @Test
+    public void boundaryTest100 () {
+        numberService.setCountInOrder(100);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A100AA 116 RUS"));
+    }
+
+    // Переход между 999 и 1000. Происходит переход к след.букве в третьем буквенном регистре (т.е по алфавиту)
+    @Test
+    public void boundaryTest1000 () {
+        numberService.setCountInOrder(999);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A999AA 116 RUS"));
+        numberService.setCountInOrder(1000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AВ 116 RUS"));
+    }
+
+    // Переход букв в третьем регистре по алфавиту
+    @Test
+    public void boundaryTestThirdRegister () {
+        numberService.setCountInOrder(1000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AВ 116 RUS"));
+        numberService.setCountInOrder(2000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AЕ 116 RUS"));
+        numberService.setCountInOrder(3000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AК 116 RUS"));
+        numberService.setCountInOrder(4000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AМ 116 RUS"));
+        numberService.setCountInOrder(5000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AН 116 RUS"));
+        numberService.setCountInOrder(6000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AО 116 RUS"));
+        numberService.setCountInOrder(7000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AР 116 RUS"));
+        numberService.setCountInOrder(8000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AС 116 RUS"));
+        numberService.setCountInOrder(9000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AТ 116 RUS"));
+        numberService.setCountInOrder(10000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AУ 116 RUS"));
+        numberService.setCountInOrder(11000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AХ 116 RUS"));
+    }
+
+
+    // Переход букв во втором регистре по алфавиту
+    @Test
+    public void boundaryTestSecondRegister () {
+        numberService.setCountInOrder(12000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000ВA 116 RUS"));
+        numberService.setCountInOrder(24000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000ЕA 116 RUS"));
+        numberService.setCountInOrder(36000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000КA 116 RUS"));
+        numberService.setCountInOrder(48000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000МA 116 RUS"));
+        numberService.setCountInOrder(60000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000НA 116 RUS"));
+        numberService.setCountInOrder(72000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000ОA 116 RUS"));
+        numberService.setCountInOrder(84000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000РA 116 RUS"));
+        numberService.setCountInOrder(96000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000СA 116 RUS"));
+        numberService.setCountInOrder(108000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000ТA 116 RUS"));
+        numberService.setCountInOrder(120000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000УA 116 RUS"));
+        numberService.setCountInOrder(132000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000ХA 116 RUS"));
+    }
+
+    // Переход букв в первом регистре по алфавиту
+    @Test
+    public void boundaryTestAllLetters3 () {
+        numberService.setCountInOrder(0);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AA 116 RUS"));
+        numberService.setCountInOrder(144000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("В000AA 116 RUS"));
+        numberService.setCountInOrder(288000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Е000AA 116 RUS"));
+        numberService.setCountInOrder(432000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("К000AA 116 RUS"));
+        numberService.setCountInOrder(576000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("М000AA 116 RUS"));
+        numberService.setCountInOrder(720000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Н000AA 116 RUS"));
+        numberService.setCountInOrder(864000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("О000AA 116 RUS"));
+        numberService.setCountInOrder(1008000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Р000AA 116 RUS"));
+        numberService.setCountInOrder(1152000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("С000AA 116 RUS"));
+        numberService.setCountInOrder(1296000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Т000AA 116 RUS"));
+        numberService.setCountInOrder(1440000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("У000AA 116 RUS"));
+        numberService.setCountInOrder(1584000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Х000AA 116 RUS"));
     }
 }
