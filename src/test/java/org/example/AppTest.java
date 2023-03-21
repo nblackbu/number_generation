@@ -119,7 +119,7 @@ public class AppTest {
 
     // Переход букв в первом регистре по алфавиту
     @Test
-    public void boundaryTestAllLetters3 () {
+    public void boundaryTestFirstRegister () {
         numberService.setCountInOrder(0);
         Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AA 116 RUS"));
         numberService.setCountInOrder(144000);
@@ -144,5 +144,19 @@ public class AppTest {
         Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("У000AA 116 RUS"));
         numberService.setCountInOrder(1584000);
         Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("Х000AA 116 RUS"));
+    }
+
+    // Проверка на ФР и ОР, указанного ТЗ
+    @Test
+    public void boundaryTestFromTZ () {
+        numberService.setCountInOrder(1164399);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("С399ВA 116 RUS"));
+        numberService.setCountInOrder(1164400);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("С400ВA 116 RUS"));
+
+        numberService.setCountInOrder(1164999);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("С999ВA 116 RUS"));
+        numberService.setCountInOrder(1165000);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("С000ВВ 116 RUS"));
     }
 }
