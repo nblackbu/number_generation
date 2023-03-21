@@ -46,6 +46,15 @@ public class AppTest {
         System.out.println(numberService.getNextCarNumberInOrder());
     }
 
+    // Проверка перехода между 0 и 1 в первом регистре
+    @Test
+    public void boundaryTest12 () {
+        numberService.setCountInOrder(0);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A000AA 116 RUS"));
+        numberService.setCountInOrder(1);
+        Assert.assertTrue(numberService.getNextCarNumberInOrder().equals("A001AA 116 RUS"));
+    }
+
     // Проверка перехода между 99 и 100 в первом регистре
     @Test
     public void boundaryTest100 () {
